@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/build/intermediates/res/merged/debug/menu/gatt_services.xml",
+        "source": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/src/main/res/menu/gatt_services.xml"
+    },
+    {
+        "merged": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/src/main/res/menu/main.xml"
+    }
+]

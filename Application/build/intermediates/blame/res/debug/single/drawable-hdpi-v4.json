@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/build/intermediates/res/merged/debug/drawable-hdpi-v4/tile.9.png",
+        "source": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/src/main/res/drawable-hdpi/tile.9.png"
+    },
+    {
+        "merged": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/home/phapli/Working/GitHub/BlueToothControl/android-bluetooth-controller/Application/src/main/res/drawable-hdpi/ic_launcher.png"
+    }
+]
