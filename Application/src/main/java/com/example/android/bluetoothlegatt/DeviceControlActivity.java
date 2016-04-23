@@ -186,11 +186,13 @@ public class DeviceControlActivity extends Activity {
                     value = accelerationEnable;
                 }
                 if (isChecked) {
-                    value[0] = 0x01;
-                    value[1] = 0x01;
+                    for(int i = 0; i< value.length; i++) {
+                        value[i] = 0x01;
+                    }
                 } else {
-                    value[0] = 0x00;
-                    value[1] = 0x00;
+                    for(int i = 0; i< value.length; i++) {
+                        value[i] = 0x00;
+                    }
                 }
                 mBluetoothLeService.writeCharacteristic(accelerationEnableCharacteristic, value);
             }
@@ -269,7 +271,7 @@ public class DeviceControlActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (accelerationEnable != null && accelerationEnable[0] == 0x01)
+                if (accelerationEnable != null && accelerationEnable[1] == 0x01)
                     mToggle.setChecked(true);
                 else
                     mToggle.setChecked(false);
