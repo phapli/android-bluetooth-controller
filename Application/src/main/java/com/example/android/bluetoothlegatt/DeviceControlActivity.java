@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -54,12 +53,14 @@ public class DeviceControlActivity extends Activity {
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+    public static final String EXTRAS_DEVICE_PIN = "DEVICE_PIN";
 
     private TextView mConnectionState;
     private ToggleButton mToggle;
     private TextView mDataField;
     private String mDeviceName;
     private String mDeviceAddress;
+    private String mPin;
     //    private ExpandableListView mGattServicesList;
     private BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
@@ -157,6 +158,7 @@ public class DeviceControlActivity extends Activity {
             };
 
 
+
     private void clearUI() {
 //        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
         mDataField.setText(R.string.no_data);
@@ -170,6 +172,7 @@ public class DeviceControlActivity extends Activity {
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        mPin = intent.getStringExtra(EXTRAS_DEVICE_PIN);
 
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
@@ -311,7 +314,7 @@ public class DeviceControlActivity extends Activity {
 //            HashMap<String, String> currentServiceData = new HashMap<String, String>();
             uuid = gattService.getUuid().toString();
 //            currentServiceData.put(
-//                    LIST_NAME, SampleGattAttributes.lookup(uuid, unknownServiceString));
+//                    LIST_NAME, GattAttributes.lookup(uuid, unknownServiceString));
 //            currentServiceData.put(LIST_UUID, uuid);
 //            gattServiceData.add(currentServiceData);
 //
@@ -322,7 +325,7 @@ public class DeviceControlActivity extends Activity {
 //            ArrayList<BluetoothGattCharacteristic> charas =
 //                    new ArrayList<BluetoothGattCharacteristic>();
 
-            if (SampleGattAttributes.ACCELERATION_SERVICE.equals(uuid)) {
+            if (GattAttributes.ACCELERATION_SERVICE.equals(uuid)) {
 
 
                 // Loops through available Characteristics.
@@ -331,16 +334,18 @@ public class DeviceControlActivity extends Activity {
 //                    HashMap<String, String> currentCharaData = new HashMap<String, String>();
                     uuid = gattCharacteristic.getUuid().toString();
 //                    currentCharaData.put(
-//                            LIST_NAME, SampleGattAttributes.lookup(uuid, unknownCharaString));
+//                            LIST_NAME, GattAttributes.lookup(uuid, unknownCharaString));
 //                    currentCharaData.put(LIST_UUID, uuid);
 //                    gattCharacteristicGroupData.add(currentCharaData);
 
-                    if (SampleGattAttributes.ENABLE_ACCELERATION_CHARACTERISTIC.equals(uuid)) {
+                    if (GattAttributes.ENABLE_ACCELERATION_CHARACTERISTIC.equals(uuid)) {
                         updateConnectionState(R.string.connected_has_acceleration);
                         accelerationEnableCharacteristic = gattCharacteristic;
                         mBluetoothLeService.readCharacteristic(gattCharacteristic);
-                        return;
+                    } else if (GattAttributes.USER_PIN_CHARACTERISTIC.equals(uuid)) {
+                        mBluetoothLeService.writeCharacteristic(gattCharacteristic, mPin.getBytes());
                     }
+
                 }
 //                mGattCharacteristics.add(charas);
 //                gattCharacteristicData.add(gattCharacteristicGroupData);
