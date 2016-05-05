@@ -391,7 +391,7 @@ public class DeviceControlActivity extends Activity {
 
     public void resetDisconnectTimer(){
         disconnectHandler.removeCallbacks(disconnectCallback);
-        disconnectHandler.postDelayed(disconnectCallback, DISCONNECT_TIMEOUT);
+        //disconnectHandler.postDelayed(disconnectCallback, DISCONNECT_TIMEOUT);
     }
 
     public void stopDisconnectTimer(){
